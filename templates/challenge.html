@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="../static/challenges.css">
+    <link rel="stylesheet" href="../static/header.css" >
+    
+{% endblock  %}
+        {% block title %}
+            {{month|title}} Challenge
+        {% endblock  %}
+
+
+        {% block content %}
+
+        {% include "/header.html" %}
+
+
+        <center>
+            <div style="padding-top: 300px; ", >
+
+            </div>
+            <div style="background-color: rgb(219, 199, 237); margin-left: 40%;margin-right: 40%;">
+
+                <h1>{{month|title}} Challenge</h1>
+                {% if text ==  None %}
+
+                  <h2>
+                    This month has no challenge yet🥺🥺🥺🥺🥺🥺
+                  </h2>
+
+                {% else %}
+
+                    <h2>{{text}}</h2>
+
+                {% endif %}
+                
+
+            </div>
+            
+
+        </center>
+        
+        
+        
+        
+        
+        
+        
+        {% endblock  %}
+
+        
+       

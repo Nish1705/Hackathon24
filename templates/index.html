@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="../static/challenges.css">
+    <link rel="stylesheet" href="../static/header.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <style>
+
+        #img {
+            width: 300px; /* Set your desired width */
+            height: 300px; /* Set your desired height */
+        }
+    </style>
+    <script >
+        function send_data(dataToSend) {
+            var xhr = new XMLHttpRequest();
+            var url = 'process_data';
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response.message);
+                }
+            };
+            xhr.send(JSON.stringify(dataToSend));
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var header1 = document.querySelectorAll("h1");
+            var image = document.querySelectorAll("img");
+            var par = document.querySelectorAll("p");
+            var listItem = document.querySelectorAll("li");
+            
+            header1.forEach(function (h1) {
+                var hoverTimeout;
+                h1.addEventListener('mouseover', function () {
+                    hoverTimeout = setTimeout(function () {
+                        var desiredText = h1.innerText;
+                        console.log(desiredText);
+                        send_data(desiredText);
+                    }, 500); 
+                });
+                h1.addEventListener('mouseout', function () {
+                    // If the mouse leaves the element before 1 second, clear the timeout
+                    clearTimeout(hoverTimeout);
+                });
+            });
+
+            image.forEach(function (img) {
+                var hoverTimeout;
+                img.addEventListener('mouseover', function () {
+                    hoverTimeout = setTimeout(function () {
+                        var desiredText = img.src;
+                        console.log(desiredText);
+                        send_data(desiredText);
+                    }, 500); 
+                });
+                img.addEventListener('mouseout', function () {
+                    // If the mouse leaves the element before 1 second, clear the timeout
+                    clearTimeout(hoverTimeout);
+                });
+            });
+
+
+
+
+
+
+            listItem.forEach(function (li) {
+                var hoverTimeout;
+                li.addEventListener('mouseover', function () {
+                    hoverTimeout = setTimeout(function () {
+                        var desiredText = li.innerText;
+                        console.log(desiredText);
+                        send_data(desiredText);
+                    }, 500); 
+                });
+                li.addEventListener('mouseout', function () {
+                    // If the mouse leaves the element before 1 second, clear the timeout
+                    clearTimeout(hoverTimeout);
+                });
+            });
+
+            par.forEach(function (p) {
+                var hoverTimeout;
+
+                p.addEventListener('mouseover', function () {
+                    hoverTimeout = setTimeout(function () {
+                        var desiredText = p.innerText;
+                        console.log(desiredText);
+                        send_data(desiredText);
+                    }, 500); 
+
+
+                p.addEventListener('mouseout', function () {
+                // If the mouse leaves the element before 1 second, clear the timeout
+                    clearTimeout(hoverTimeout);
+                });
+
+            });
+        });
+        
+
+        
+    });
+</script>
+
+{% endblock  %}
+    {% block title %}
+    
+    Challenge Navigator
+
+    {% endblock title %}
+        
+    {% block content %}
+    {% include "header.html" %}
+        <ul>
+            {% for month in month_list %}
+                <li ><a id ={{month}} href="/month-challenge/"{{month}}>{{month|title}}</a></li>
+            {% endfor %}
+
+            
+        </ul> 
+        <center>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row"></td>
+                    <td><img id = "img" src ="../static/images.jpeg" alt="NO IMAGE"></td>
+                    <td><img id = "img" src ="../static/holi.jpeg" alt="NO IMAGE"></td>
+                </tr>
+                <tr>
+                    <td scope="row"></td>
+                    <td><img style="object-fit:fill;" id = "img" src ="../static/ocean.jpg" alt="NO IMAGE"></td>
+                    <td><img id = "img" src ="../static/saitama.jpg" alt="NO IMAGE"> </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>   
+            
+            
+            
+    {% endblock  %}
+
+
+
+        

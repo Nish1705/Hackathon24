@@ -1,0 +1,37 @@
+<header>
+    <nav>
+          
+       <a id = "this" href="/">All challenges</a>
+
+    </nav>
+    <script>
+        // Find the element you want to hover over
+            function send_data(dataToSend) {
+            var xhr = new XMLHttpRequest();
+            var url = 'process_data';
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response.message);
+                }
+            };
+            xhr.send(JSON.stringify(dataToSend));
+        }
+        
+            var hoverElement = document.querySelector("#this");
+
+            // Add a mouseover event listener to the element
+            hoverElement.addEventListener('mouseover', function () {
+                // Extract the text or any other information you need
+                var desiredText = this.innerText; // Change this based on your requirement
+
+                // Print or use the extracted text
+                console.log(desiredText);
+                send_data(desiredText);
+
+            });
+
+    </script>
+</header>
